@@ -25,7 +25,7 @@ firebase.initializeApp(config);
 
 var database = firebase.database();
 
-// 2. Button for adding Employees
+
 $("#add-employee-btn").on("click", function (event) {
   event.preventDefault();
 
@@ -35,7 +35,6 @@ $("#add-employee-btn").on("click", function (event) {
   var empMilitaryInput = $("#military-input").val().trim();
   var empFrequencyInput = $("#frequency-input").val().trim();
 
-  // Creates local "temporary" object for holding employee data
   var newEmp = {
     name: empTrainName,
     role: empDestination,
@@ -71,13 +70,11 @@ database.ref().on("child_added", function (childSnapshot) {
   var empStart = childSnapshot.val().start;
   var empRate = childSnapshot.val().rate;
 
-  // Employee Info
   console.log(empName);
   console.log(empRole);
   console.log(empStart);
   console.log(empRate);
 
-  // Prettify the employee start
   var empStartPretty = moment.unix(empStart).format("MM/DD/YYYY");
 
   // Calculate the months worked using hardcore math
@@ -102,10 +99,3 @@ database.ref().on("child_added", function (childSnapshot) {
   $("#employee-table > tbody").append(newRow);
 });
 
-// Example Time Math
-// -----------------------------------------------------------------------------
-// Assume Employee start date of January 1, 2015
-// Assume current date is March 1, 2016
-
-// We know that this is 15 months.
-// Now we will create code in moment.js to confirm that any attempt we use meets this test case
